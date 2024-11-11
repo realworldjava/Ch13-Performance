@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item Requested Successfully</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p th:if="${message}"  th:text="${message}"></p>
+
+<h2>Status</h2>
+Available to borrow:
+<ul>
+    <li th:each="entry: ${itemAvailability}"
+        th:if="${entry.value} == true"
+        th:text="${idToName.get(entry.key)}">
+    </li>
+</ul>
+Currently on loan:
+<ul>
+    <li th:each="entry: ${itemAvailability}"
+        th:if="${entry.value} == false"
+        th:text="${idToName.get(entry.key)}">
+    </li>
+</ul>
+
+<h2>Borrow</h2>
+<form method="post" action="borrowItem">
+    <p><label for="borrow">Item to borrow:</label></p>
+    <select id="borrow" name="itemId">
+        <option th:each="entry : ${itemAvailability}"
+                th:value="${entry.key}"
+                th:if="${entry.value} == true"
+                th:text="${idToName.get(entry.key)}">
+        </option>
+    </select>
+    <br />
+    <input type="submit" />
+</form>
+
+<h2>Return</h2>
+<form method="post" action="returnItem">
+   <p><label for="return">Item to return:</label></p>
+    <select id="return" name="itemId">
+        <option th:each="entry : ${itemAvailability}"
+                th:value="${entry.key}"
+                th:if="${entry.value} == false"
+                th:text="${idToName.get(entry.key)}">
+        </option>
+    </select>
+    <br />
+    <input type="submit" />
+</form>
+
+</body>
+</html>

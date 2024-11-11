@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Phone Call Summary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Calls by Month</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Number of Calls</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="entry : ${byMonth}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${entry.value}"></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
